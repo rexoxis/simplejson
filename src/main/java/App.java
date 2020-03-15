@@ -33,7 +33,8 @@ public class App {
         }
         */
 
-        // jsonsimple 라이브러리에서는 JSONObject, JSONArray
+        // jsonsimple 라이브러리에서는 JSONObject, JSONArray를 이용해서 파싱
+        // JSONObject은 map, JSONArray는 list를 다루는것과 비슷하다
         String json = "{ \"response\" : { \"code\" : 200 }, \"map_id\" : \"Savage_Main\", \"deaths\" : [{ \"time_event\" : 250, \"is_range_valid\" : true, \"description\" : \"QBZ\" }, { \"time_event\" : 250, \"is_range_valid\" : true, \"description\" : \"QBZ\" }] }";
 
         JSONParser jsonParser = new JSONParser();
@@ -41,19 +42,19 @@ public class App {
         // String 형태의 json을 json 객체로 변환
         JSONObject gameResult = (JSONObject) jsonParser.parse(json);
 
-        // gameResult객체의 response 값 출력
+        // 변환한 json객체의 response 값 출력
         System.out.println(gameResult.get("response"));
 
-        // gameResult객체의 deaths의 값 출력
+        // 변환한 json객체의 deaths의 값 출력
         System.out.println(gameResult.get("deaths"));
 
-        // gameResult객체의 response의 code값 출력
+        // 변환한 json객체의 response의 code값 출력
         JSONObject response = (JSONObject) gameResult.get("response");
         System.out.println(response.get("code"));
 
-        // gameResult객체의 deaths의 time_event값 출력
+        // 변환한 json객체의 deaths의 time_event값 출력
         JSONArray deaths = (JSONArray) gameResult.get("deaths");
-        JSONObject deathsResult = null;
+        JSONObject deathsResult;
 
         for (int i = 0; i < deaths.size(); i++) {
             deathsResult = (JSONObject) deaths.get(i);
@@ -61,7 +62,8 @@ public class App {
         }
 
         // json 객체를 String으로 변환
-        System.out.println(gameResult.toJSONString());
+        String jsonToString = gameResult.toJSONString();
+        System.out.println(jsonToString);
 
 
         // 자바 객체를 json으로
